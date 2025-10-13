@@ -74,3 +74,20 @@ body {
 .category p {
   font-weight: 500;
 }
+
+/* Dil değiştir butonu */
+.change-lang-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #e67e22;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.change-lang-btn:hover {
+  background: #d35400;
+}
