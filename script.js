@@ -64,6 +64,12 @@ function showMainScreen(lang) {
   });
 }
 
+// Geri butonu
+function backToLanguageScreen() {
+  mainScreen.classList.remove("active");
+  languageScreen.classList.add("active");
+}
+
 window.onload = () => {
   const savedLang = localStorage.getItem("language");
   if (savedLang) {
