@@ -13,6 +13,7 @@ body {
   height: 100vh;
   text-align: center;
   color: #333;
+  flex-direction: column;
 }
 
 .language-screen, .main-screen {
@@ -44,9 +45,11 @@ body {
 
 .categories {
   display: grid;
-  grid-template-columns: repeat(2, 120px);
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 25px;
   justify-content: center;
+  width: 90%;
+  max-width: 600px;
 }
 
 .category {
