@@ -5,34 +5,34 @@ const categoriesContainer = document.querySelector(".categories");
 
 const categories = {
   tr: [
-    { icon: "fa-tshirt", name: "Giyim Yerleri" },
+    { icon: "fa-shirt", name: "Giyim Yerleri", link: "giyim.html" },
     { icon: "fa-utensils", name: "Restoranlar" },
     { icon: "fa-mug-hot", name: "Kafeler" },
     { icon: "fa-building", name: "AVM'ler" },
     { icon: "fa-smoking", name: "Nargile Kafeler" },
     { icon: "fa-landmark", name: "Tarihi Yerler" },
     { icon: "fa-museum", name: "Müzeler" },
-    { icon: "fa-wine-glass", name: "Eğlence Yerleri" },
+    { icon: "fa-champagne-glasses", name: "Eğlence Yerleri" },
   ],
   en: [
-    { icon: "fa-tshirt", name: "Clothing Stores" },
+    { icon: "fa-shirt", name: "Clothing Stores", link: "giyim.html" },
     { icon: "fa-utensils", name: "Restaurants" },
     { icon: "fa-mug-hot", name: "Cafes" },
     { icon: "fa-building", name: "Malls" },
     { icon: "fa-smoking", name: "Hookah Cafes" },
     { icon: "fa-landmark", name: "Historical Sites" },
     { icon: "fa-museum", name: "Museums" },
-    { icon: "fa-wine-glass", name: "Entertainment" },
+    { icon: "fa-champagne-glasses", name: "Entertainment" },
   ],
   ar: [
-    { icon: "fa-tshirt", name: "أماكن الملابس" },
+    { icon: "fa-shirt", name: "أماكن الملابس", link: "giyim.html" },
     { icon: "fa-utensils", name: "مطاعم" },
     { icon: "fa-mug-hot", name: "مقاهي" },
     { icon: "fa-building", name: "مراكز التسوق" },
     { icon: "fa-smoking", name: "كافيهات النرجيلة" },
     { icon: "fa-landmark", name: "أماكن تاريخية" },
     { icon: "fa-museum", name: "متاحف" },
-    { icon: "fa-wine-glass", name: "أماكن الترفيه" },
+    { icon: "fa-champagne-glasses", name: "أماكن الترفيه" },
   ],
 };
 
@@ -59,15 +59,13 @@ function showMainScreen(lang) {
       <i class="fa-solid ${cat.icon}"></i>
       <p>${cat.name}</p>
     `;
-    div.onclick = () => alert(`${cat.name} sayfası yakında eklenecek.`);
+    if (cat.link) {
+      div.onclick = () => (window.location.href = cat.link);
+    } else {
+      div.onclick = () => alert(`${cat.name} sayfası yakında eklenecek.`);
+    }
     categoriesContainer.appendChild(div);
   });
-}
-
-// Geri butonu
-function backToLanguageScreen() {
-  mainScreen.classList.remove("active");
-  languageScreen.classList.add("active");
 }
 
 window.onload = () => {
