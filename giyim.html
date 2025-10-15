@@ -17,13 +17,13 @@
     <div class="store-container" id="store-container"></div>
   </div>
 
-  <!-- Görsel Galerisi -->
+  <!-- Lightbox Popup Galeri -->
   <div class="image-popup" id="image-popup">
     <span class="close-btn" onclick="closePopup()">&times;</span>
-    <img id="popup-img" src="" alt="">
-    <div class="nav-btns">
-      <button onclick="prevImage()">&#10094;</button>
-      <button onclick="nextImage()">&#10095;</button>
+    <div class="popup-content">
+      <button class="nav-btn left" onclick="prevImage()">&#10094;</button>
+      <img id="popup-img" src="" alt="">
+      <button class="nav-btn right" onclick="nextImage()">&#10095;</button>
     </div>
   </div>
 
