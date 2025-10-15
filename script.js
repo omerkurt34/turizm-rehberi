@@ -1,5 +1,7 @@
+let currentLang = 'tr';
+
 const stores = [
-  {category:"Kafeler",name:"Villa Cello",images:["villacello1.jpg","villacello2.jpg","villacello3.jpg"],folder:"kafeler",menu:["Espresso","Latte","Pasta","Salata"],featured:true},
+  {category:"Kafeler",name:"Villa Cello",images:["villacello1.jpg","villacello2.jpg"],folder:"kafeler",menu:["Espresso","Latte","Pasta"],featured:true},
   {category:"AVM'ler",name:"İstinye Park",images:["istanbulavm1.jpg","istanbulavm2.jpg"],folder:"avm",featured:true},
   {category:"AVM'ler",name:"Zorlu Center",images:["istanbulavm3.jpg","istanbulavm4.jpg"],folder:"avm"},
   {category:"AVM'ler",name:"Kanyon",images:["istanbulavm5.jpg","istanbulavm6.jpg"],folder:"avm"},
@@ -13,23 +15,31 @@ const imagePopup = document.getElementById("image-popup");
 const popupImg = document.getElementById("popup-img");
 const popupMenu = document.getElementById("popup-menu");
 
-let currentStore = null;
-let currentImageIndex = 0;
+let currentStore=null;
+let currentImageIndex=0;
 
 const languageSelect = document.getElementById("language-select");
 const categoryFilter = document.getElementById("category-filter");
 
-// Render mağazalar
+const translations = {
+  tr:{ "Kafeler":"Kafeler","AVM'ler":"AVM'ler","Villa Cello":"Villa Cello","İstinye Park":"İstinye Park","Zorlu Center":"Zorlu Center","Kanyon":"Kanyon","Forum İstanbul":"Forum İstanbul","Marmara Forum":"Marmara Forum","Aqua Florya":"Aqua Florya" },
+  en:{ "Kafeler":"Cafes","AVM'ler":"Malls","Villa Cello":"Villa Cello","İstinye Park":"Istinye Park","Zorlu Center":"Zorlu Center","Kanyon":"Kanyon","Forum İstanbul":"Forum Istanbul","Marmara Forum":"Marmara Forum","Aqua Florya":"Aqua Florya" },
+  ar:{ "Kafeler":"المقاهي","AVM'ler":"المولات","Villa Cello":"فيلا سيلو","İstinye Park":"إستيني بارك","Zorlu Center":"زورلو سنتر","Kanyon":"كانيون","Forum İstanbul":"فوروم إسطنبول","Marmara Forum":"مارمارا فوروم","Aqua Florya":"أكوا فلوريا" }
+};
+
 function renderStores(filter="all"){
   storeContainer.innerHTML="";
-  stores.filter(s=>filter==="all"||s.category===filter)
-        .forEach((store,index)=>{
+  stores.filter(s=>filter==="all"||s.category===filter).forEach((store,index)=>{
     const div = document.createElement("div");
     div.classList.add("store-card");
     if(store.featured) div.classList.add("featured");
+
+    const displayName = translations[currentLang][store.name]||store.name;
+    const displayCategory = translations[currentLang][store.category]||store.category;
+
     div.innerHTML = `<div class="store-img-container">
       <img src="images/${store.folder}/${store.images[0]}" alt="${store.name}">
-      <div class="overlay"><h3>${store.name}</h3><p>${store.category}</p></div>
+      <div class="overlay"><h3>${displayName}</h3><p>${displayCategory}</p></div>
     </div>`;
     div.onclick = ()=>openGallery(index);
     storeContainer.appendChild(div);
@@ -40,32 +50,16 @@ function openGallery(index){
   currentStore = stores[index];
   currentImageIndex = 0;
   popupImg.src=`images/${currentStore.folder}/${currentStore.images[currentImageIndex]}`;
-  popupMenu.innerHTML = currentStore.menu? "<h4>Menü</h4><ul>"+currentStore.menu.map(i=>`<li>${i}</li>`).join("")+"</ul>":"";
+  const displayName = translations[currentLang][currentStore.name]||currentStore.name;
+  popupMenu.innerHTML = currentStore.menu? `<h4>${displayName} Menüsü</h4><ul>`+currentStore.menu.map(i=>`<li>${i}</li>`).join("")+"</ul>":"";
   imagePopup.classList.add("active");
 }
+
 function closePopup(){imagePopup.classList.remove("active");}
 function nextImage(){currentImageIndex=(currentImageIndex+1)%currentStore.images.length;popupImg.src=`images/${currentStore.folder}/${currentStore.images[currentImageIndex]}`;}
 function prevImage(){currentImageIndex=(currentImageIndex-1+currentStore.images.length)%currentStore.images.length;popupImg.src=`images/${currentStore.folder}/${currentStore.images[currentImageIndex]}`;}
 
-// Dil seçimi
-const translations = {
-  tr:{ "Giyim Yerleri":"Giyim Yerleri","Kafeler":"Kafeler","AVM'ler":"AVM'ler","Villa Cello":"Villa Cello","İstinye Park":"İstinye Park" },
-  en:{ "Giyim Yerleri":"Clothing Stores","Kafeler":"Cafes","AVM'ler":"Malls","Villa Cello":"Villa Cello","İstinye Park":"Istinye Park" },
-  ar:{ "Giyim Yerleri":"أماكن الملابس","Kafeler":"المقاهي","AVM'ler":"المولات","Villa Cello":"فيلا سيلو","İstinye Park":"إستيني بارك" }
-};
-
-languageSelect.onchange = ()=>{
-  const lang = languageSelect.value;
-  document.querySelectorAll(".store-card .overlay h3").forEach(el=>{
-    const original = el.textContent;
-    if(translations[lang][original]) el.textContent=translations[lang][original];
-  });
-  document.querySelectorAll(".store-card .overlay p").forEach(el=>{
-    const original = el.textContent;
-    if(translations[lang][original]) el.textContent=translations[lang][original];
-  });
-};
-
-categoryFilter.onchange = ()=>renderStores(categoryFilter.value);
+languageSelect.onchange=()=>{currentLang=languageSelect.value;renderStores(categoryFilter.value);}
+categoryFilter.onchange=()=>renderStores(categoryFilter.value);
 
 renderStores();
