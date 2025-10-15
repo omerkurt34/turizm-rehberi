@@ -1,89 +1,67 @@
-const languageScreen = document.getElementById("language-screen");
-const mainScreen = document.getElementById("main-screen");
-const mainTitle = document.getElementById("main-title");
-const categoriesContainer = document.querySelector(".categories");
+const stores = [
+  {
+    category: "Giyim Yerleri",
+    name: "Bilgins Mağazası",
+    images: ["bilgins1.jpg","bilgins2.jpg","bilgins3.jpg"],
+    folder: "giyim"
+  },
+  {
+    category: "Restoranlar",
+    name: "Lezzet Restoran",
+    images: ["rest1.jpg","rest2.jpg"],
+    folder: "restoran"
+  },
+  {
+    category: "Kafeler",
+    name: "Coffee Time",
+    images: ["kafe1.jpg","kafe2.jpg"],
+    folder: "kafeler"
+  },
+  // diğer kategoriler eklenebilir...
+];
 
-// Kategoriler ve linkler
-const categories = {
-  tr: [
-    { icon: "fa-tshirt", name: "Giyim Yerleri", link: "giyim.html" },
-    { icon: "fa-utensils", name: "Restoranlar" },
-    { icon: "fa-mug-hot", name: "Kafeler" },
-    { icon: "fa-building", name: "AVM'ler" },
-    { icon: "fa-smoking", name: "Nargile Kafeler" },
-    { icon: "fa-landmark", name: "Tarihi Yerler" },
-    { icon: "fa-museum", name: "Müzeler" },
-    { icon: "fa-wine-glass", name: "Eğlence Yerleri" }
-  ],
-  en: [
-    { icon: "fa-tshirt", name: "Clothing Stores", link: "giyim.html" },
-    { icon: "fa-utensils", name: "Restaurants" },
-    { icon: "fa-mug-hot", name: "Cafes" },
-    { icon: "fa-building", name: "Malls" },
-    { icon: "fa-smoking", name: "Hookah Cafes" },
-    { icon: "fa-landmark", name: "Historical Sites" },
-    { icon: "fa-museum", name: "Museums" },
-    { icon: "fa-wine-glass", name: "Entertainment" }
-  ],
-  ar: [
-    { icon: "fa-tshirt", name: "أماكن الملابس", link: "giyim.html" },
-    { icon: "fa-utensils", name: "مطاعم" },
-    { icon: "fa-mug-hot", name: "مقاهي" },
-    { icon: "fa-building", name: "مراكز التسوق" },
-    { icon: "fa-smoking", name: "كافيهات النرجيلة" },
-    { icon: "fa-landmark", name: "أماكن تاريخية" },
-    { icon: "fa-museum", name: "متاحف" },
-    { icon: "fa-wine-glass", name: "أماكن الترفيه" }
-  ]
-};
+const storeContainer = document.getElementById("store-container");
+const imagePopup = document.getElementById("image-popup");
+const popupImg = document.getElementById("popup-img");
 
-// Dil seçimi
-function setLanguage(lang) {
-  localStorage.setItem("language", lang);
-  showMainScreen(lang);
+let currentStore = null;
+let currentImageIndex = 0;
+
+// Kartları oluştur
+stores.forEach((store, index) => {
+  const div = document.createElement("div");
+  div.classList.add("store-card");
+  div.innerHTML = `
+    <div class="store-img-container">
+      <img src="images/${store.folder}/${store.images[0]}" alt="${store.name}">
+      <div class="overlay"><h3>${store.name}</h3><p>${store.category}</p></div>
+    </div>
+  `;
+  div.onclick = () => openGallery(index);
+  storeContainer.appendChild(div);
+});
+
+// Popup açma
+function openGallery(index) {
+  currentStore = stores[index];
+  currentImageIndex = 0;
+  popupImg.src = `images/${currentStore.folder}/${currentStore.images[currentImageIndex]}`;
+  imagePopup.classList.add("active");
 }
 
-// Ana ekranı göster
-function showMainScreen(lang) {
-  languageScreen.classList.remove("active");
-  mainScreen.classList.add("active");
-  mainTitle.textContent =
-    lang === "tr"
-      ? "Kategoriler"
-      : lang === "en"
-      ? "Categories"
-      : "الفئات";
-
-  categoriesContainer.innerHTML = "";
-
-  categories[lang].forEach((cat) => {
-    const div = document.createElement("div");
-    div.classList.add("category");
-    div.innerHTML = `
-      <i class="fa-solid ${cat.icon}"></i>
-      <p>${cat.name}</p>
-    `;
-    if (cat.link) {
-      div.onclick = () => (window.location.href = cat.link);
-    } else {
-      div.onclick = () => alert(`${cat.name} sayfası yakında eklenecek.`);
-    }
-    categoriesContainer.appendChild(div);
-  });
+// Popup kapatma
+function closePopup() {
+  imagePopup.classList.remove("active");
 }
 
-// Geri butonu (dil ekranına dön)
-function backToLanguageScreen() {
-  mainScreen.classList.remove("active");
-  languageScreen.classList.add("active");
+// Sonraki görsel
+function nextImage() {
+  currentImageIndex = (currentImageIndex + 1) % currentStore.images.length;
+  popupImg.src = `images/${currentStore.folder}/${currentStore.images[currentImageIndex]}`;
 }
 
-// Sayfa yüklendiğinde
-window.onload = () => {
-  const savedLang = localStorage.getItem("language");
-  if (savedLang) {
-    showMainScreen(savedLang);
-  } else {
-    languageScreen.classList.add("active");
-  }
-};
+// Önceki görsel
+function prevImage() {
+  currentImageIndex = (currentImageIndex - 1 + currentStore.images.length) % currentStore.images.length;
+  popupImg.src = `images/${currentStore.folder}/${currentStore.images[currentImageIndex]}`;
+}
