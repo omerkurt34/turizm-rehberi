@@ -12,6 +12,7 @@ const popupImg = document.getElementById("popup-img");
 let currentStore = null;
 let currentImageIndex = 0;
 
+// Mağaza kartlarını oluştur
 stores.forEach((store, index) => {
   const div = document.createElement("div");
   div.classList.add("store-card");
@@ -23,6 +24,7 @@ stores.forEach((store, index) => {
   storeContainer.appendChild(div);
 });
 
+// Popup açma
 function openGallery(index) {
   currentStore = stores[index];
   currentImageIndex = 0;
@@ -30,19 +32,20 @@ function openGallery(index) {
   imagePopup.classList.add("active");
 }
 
+// Popup kapatma
 function closePopup() {
   imagePopup.classList.remove("active");
 }
 
+// Sonraki görsel
 function nextImage() {
-  currentImageIndex =
-    (currentImageIndex + 1) % currentStore.images.length;
+  currentImageIndex = (currentImageIndex + 1) % currentStore.images.length;
   popupImg.src = `images/giyim/${currentStore.images[currentImageIndex]}`;
 }
 
+// Önceki görsel
 function prevImage() {
   currentImageIndex =
-    (currentImageIndex - 1 + currentStore.images.length) %
-    currentStore.images.length;
+    (currentImageIndex - 1 + currentStore.images.length) % currentStore.images.length;
   popupImg.src = `images/giyim/${currentStore.images[currentImageIndex]}`;
 }
