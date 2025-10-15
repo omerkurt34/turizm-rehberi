@@ -1,9 +1,8 @@
 /* Genel ayarlar */
 body {
   margin: 0;
-  padding: 0;
-  font-family: "Poppins", sans-serif;
-  background: #f5f6fa;
+  font-family: 'Poppins', sans-serif;
+  background: #f0f2f5;
   color: #333;
 }
 
@@ -11,27 +10,28 @@ body {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 15px;
+  padding: 20px;
   text-align: center;
 }
 
 /* Başlık */
 .page-title {
-  margin: 15px 0;
+  font-size: 28px;
+  margin: 20px 0;
   color: #2c3e50;
-  font-size: 24px;
+  font-weight: 600;
 }
 
 /* Geri butonu */
 .back-btn {
-  padding: 8px 15px;
+  padding: 10px 20px;
   border: none;
   background: #3498db;
   color: white;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
   transition: 0.3s;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 .back-btn:hover {
   background: #2980b9;
@@ -40,49 +40,68 @@ body {
 /* Mağaza kartları */
 .store-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 25px;
   justify-items: center;
 }
 
 .store-card {
-  background: white;
-  border-radius: 15px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.3s;
+  position: relative;
   width: 100%;
-  max-width: 180px;
+  max-width: 220px;
+  cursor: pointer;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .store-card:hover {
-  transform: scale(1.05);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.25);
 }
 
-.store-card img {
+.store-img-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.store-img-container img {
   width: 100%;
-  height: 150px;
+  height: 180px;
   object-fit: cover;
+  transition: transform 0.5s;
 }
 
-.store-card h3 {
-  padding: 10px;
-  color: #34495e;
+.store-card:hover .store-img-container img {
+  transform: scale(1.1);
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 0;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  text-align: center;
+  font-weight: 600;
   font-size: 16px;
 }
 
 /* Popup galeri */
 .image-popup {
   position: fixed;
-  top: 0; left: 0;
+  top:0; left:0;
   width: 100%; height: 100%;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.9);
   display: none;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  z-index: 999;
+  z-index: 1000;
+  padding: 15px;
 }
 .image-popup.active {
   display: flex;
@@ -91,30 +110,36 @@ body {
 .image-popup img {
   max-width: 90%;
   max-height: 80%;
-  border-radius: 10px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
 .close-btn {
   position: absolute;
   top: 15px;
   right: 25px;
-  font-size: 30px;
+  font-size: 32px;
   color: white;
   cursor: pointer;
+  transition: 0.3s;
+}
+.close-btn:hover {
+  color: #3498db;
 }
 
-/* Navigasyon butonları */
 .nav-btns {
-  margin-top: 10px;
+  margin-top: 15px;
 }
 .nav-btns button {
-  padding: 8px 12px;
+  padding: 10px 16px;
   background: #3498db;
   border: none;
   color: white;
-  margin: 0 5px;
-  border-radius: 6px;
+  margin: 0 8px;
+  border-radius: 8px;
+  font-size: 18px;
   cursor: pointer;
+  transition: 0.3s;
 }
 .nav-btns button:hover {
   background: #2980b9;
@@ -122,13 +147,13 @@ body {
 
 /* Mobil uyumlu */
 @media (max-width: 480px) {
-  .store-card img {
-    height: 120px;
+  .store-img-container img {
+    height: 140px;
   }
-  .store-card h3 {
+  .overlay {
     font-size: 14px;
   }
   .page-title {
-    font-size: 20px;
+    font-size: 22px;
   }
 }
