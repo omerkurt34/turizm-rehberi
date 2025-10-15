@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Giyim Yerleri</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="giyim.js"></script>
+</head>
+<body>
+
+  <button class="back-btn" onclick="window.location.href='index.html'">⬅ Ana Sayfa</button>
+
+  <h1 class="page-title">👕 Giyim Yerleri</h1>
+
+  <div class="store-container" id="store-container"></div>
+
+  <!-- Görsel Galerisi -->
+  <div class="image-popup" id="image-popup">
+    <span class="close-btn" onclick="closePopup()">&times;</span>
+    <img id="popup-img" src="" alt="">
+    <div class="nav-btns">
+      <button onclick="prevImage()">⬅</button>
+      <button onclick="nextImage()">➡</button>
+    </div>
+  </div>
+
+</body>
+</html>
