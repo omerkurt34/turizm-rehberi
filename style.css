@@ -13,7 +13,6 @@ body {
   height: 100vh;
   text-align: center;
   color: #333;
-  flex-direction: column;
 }
 
 .language-screen, .main-screen {
@@ -45,11 +44,9 @@ body {
 
 .categories {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  grid-template-columns: repeat(2, 120px);
   gap: 25px;
   justify-content: center;
-  width: 90%;
-  max-width: 600px;
 }
 
 .category {
@@ -74,20 +71,98 @@ body {
 .category p {
   font-weight: 500;
 }
-
-/* Dil değiştir butonu */
-.change-lang-btn {
+h2 {
+  text-align: center;
   margin-top: 20px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 8px;
-  background: #e67e22;
+  color: #2c3e50;
+}
+
+.store-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 30px;
+}
+
+.store-card {
+  background: white;
+  border-radius: 15px;
+  width: 200px;
+  text-align: center;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: 0.3s;
+  overflow: hidden;
+}
+
+.store-card:hover {
+  transform: scale(1.05);
+}
+
+.store-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.store-card p {
+  padding: 10px;
+  font-weight: 500;
+  color: #333;
+}
+
+/* Popup Galeri */
+.gallery-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 999;
+}
+
+.gallery-popup.active {
+  display: flex;
+}
+
+.gallery-popup img {
+  max-width: 90%;
+  max-height: 80vh;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #000;
+}
+
+.close-btn {
+  position: absolute;
+  top: 30px;
+  right: 40px;
   color: white;
-  font-size: 16px;
+  font-size: 40px;
+  cursor: pointer;
+}
+
+.gallery-nav {
+  margin-top: 20px;
+}
+
+.gallery-nav button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  border: none;
+  border-radius: 6px;
+  background: #3498db;
+  color: white;
+  font-size: 18px;
   cursor: pointer;
   transition: 0.3s;
 }
 
-.change-lang-btn:hover {
-  background: #d35400;
+.gallery-nav button:hover {
+  background: #2980b9;
 }
