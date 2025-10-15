@@ -1,30 +1,29 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Turizm Rehberi</title>
-  <link rel="stylesheet" href="style.css" />
-  <script defer src="script.js"></script>
-  <script src="https://kit.fontawesome.com/a2d9a64f1a.js" crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Turizm Rehberi</title>
+<link rel="stylesheet" href="style.css">
+<script defer src="script.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <!-- Dil Seçim Ekranı -->
-  <div class="language-screen" id="language-screen">
-    <h1>Language / Dil / اللغة</h1>
-    <div class="lang-buttons">
-      <button onclick="setLanguage('tr')">🇹🇷 Türkçe</button>
-      <button onclick="setLanguage('en')">🇬🇧 English</button>
-      <button onclick="setLanguage('ar')">🇸🇦 العربية</button>
-    </div>
-  </div>
+<div class="container">
+  <h1 class="page-title">🌍 Turizm Rehberi</h1>
+  <div class="store-container" id="store-container"></div>
+</div>
 
-  <!-- Ana Ekran -->
-  <div class="main-screen" id="main-screen">
-    <h2 id="main-title"></h2>
-    <div class="categories"></div>
+<!-- Popup Galeri -->
+<div class="image-popup" id="image-popup">
+  <span class="close-btn" onclick="closePopup()">&times;</span>
+  <div class="popup-content">
+    <button class="nav-btn left" onclick="prevImage()">&#10094;</button>
+    <img id="popup-img" src="" alt="">
+    <button class="nav-btn right" onclick="nextImage()">&#10095;</button>
   </div>
+</div>
 
 </body>
 </html>
