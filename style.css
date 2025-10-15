@@ -1,99 +1,59 @@
-* {
+/* Genel ayarlar */
+body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
   font-family: "Poppins", sans-serif;
-}
-
-body {
   background: #f5f6fa;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  text-align: center;
   color: #333;
 }
 
-.language-screen, .main-screen {
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 15px;
+  text-align: center;
 }
 
-.language-screen.active, .main-screen.active {
-  display: flex;
+/* Başlık */
+.page-title {
+  margin: 15px 0;
+  color: #2c3e50;
+  font-size: 24px;
 }
 
-.lang-buttons button {
-  padding: 10px 20px;
-  margin: 5px;
+/* Geri butonu */
+.back-btn {
+  padding: 8px 15px;
   border: none;
-  border-radius: 8px;
   background: #3498db;
   color: white;
-  font-size: 16px;
+  border-radius: 8px;
   cursor: pointer;
   transition: 0.3s;
+  margin-bottom: 20px;
 }
-
-.lang-buttons button:hover {
+.back-btn:hover {
   background: #2980b9;
 }
 
-.categories {
+/* Mağaza kartları */
+.store-container {
   display: grid;
-  grid-template-columns: repeat(2, 120px);
-  gap: 25px;
-  justify-content: center;
-}
-
-.category {
-  background: white;
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.category:hover {
-  transform: scale(1.05);
-}
-
-.category i {
-  font-size: 30px;
-  margin-bottom: 10px;
-  color: #3498db;
-}
-
-.category p {
-  font-weight: 500;
-}
-h2 {
-  text-align: center;
-  margin-top: 20px;
-  color: #2c3e50;
-}
-
-.store-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 20px;
-  padding: 30px;
+  justify-items: center;
 }
 
 .store-card {
   background: white;
   border-radius: 15px;
-  width: 200px;
-  text-align: center;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: 0.3s;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
   overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s;
+  width: 100%;
+  max-width: 180px;
 }
 
 .store-card:hover {
@@ -106,19 +66,17 @@ h2 {
   object-fit: cover;
 }
 
-.store-card p {
+.store-card h3 {
   padding: 10px;
-  font-weight: 500;
-  color: #333;
+  color: #34495e;
+  font-size: 16px;
 }
 
-/* Popup Galeri */
-.gallery-popup {
+/* Popup galeri */
+.image-popup {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   background: rgba(0,0,0,0.8);
   display: none;
   justify-content: center;
@@ -126,43 +84,51 @@ h2 {
   flex-direction: column;
   z-index: 999;
 }
-
-.gallery-popup.active {
+.image-popup.active {
   display: flex;
 }
 
-.gallery-popup img {
+.image-popup img {
   max-width: 90%;
-  max-height: 80vh;
+  max-height: 80%;
   border-radius: 10px;
-  box-shadow: 0 0 10px #000;
 }
 
 .close-btn {
   position: absolute;
-  top: 30px;
-  right: 40px;
+  top: 15px;
+  right: 25px;
+  font-size: 30px;
   color: white;
-  font-size: 40px;
   cursor: pointer;
 }
 
-.gallery-nav {
-  margin-top: 20px;
+/* Navigasyon butonları */
+.nav-btns {
+  margin-top: 10px;
 }
-
-.gallery-nav button {
-  padding: 10px 20px;
-  margin: 0 10px;
-  border: none;
-  border-radius: 6px;
+.nav-btns button {
+  padding: 8px 12px;
   background: #3498db;
+  border: none;
   color: white;
-  font-size: 18px;
+  margin: 0 5px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: 0.3s;
+}
+.nav-btns button:hover {
+  background: #2980b9;
 }
 
-.gallery-nav button:hover {
-  background: #2980b9;
+/* Mobil uyumlu */
+@media (max-width: 480px) {
+  .store-card img {
+    height: 120px;
+  }
+  .store-card h3 {
+    font-size: 14px;
+  }
+  .page-title {
+    font-size: 20px;
+  }
 }
