@@ -12,13 +12,15 @@ const popupImg = document.getElementById("popup-img");
 let currentStore = null;
 let currentImageIndex = 0;
 
-// Mağaza kartlarını oluştur
+// Mağaza kartları oluştur
 stores.forEach((store, index) => {
   const div = document.createElement("div");
   div.classList.add("store-card");
   div.innerHTML = `
-    <img src="images/giyim/${store.images[0]}" alt="${store.name}">
-    <h3>${store.name}</h3>
+    <div class="store-img-container">
+      <img src="images/giyim/${store.images[0]}" alt="${store.name}">
+      <div class="overlay"><h3>${store.name}</h3></div>
+    </div>
   `;
   div.onclick = () => openGallery(index);
   storeContainer.appendChild(div);
